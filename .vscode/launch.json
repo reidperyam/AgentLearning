@@ -1,0 +1,65 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch API",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-api",
+            "program": "${workspaceFolder}/src/ClaudeLearningProject.Api/bin/Debug/net8.0/ClaudeLearningProject.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/ClaudeLearningProject.Api",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5000"
+            },
+            "console": "integratedTerminal",
+            "serverReadyAction": {
+                "pattern": "Application started",
+                "uriFormat": "http://localhost:5000/swagger",
+                "action": "openExternally"
+            }
+        },
+        {
+            "name": "Launch Frontend",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "cwd": "${workspaceFolder}/src/frontend",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**"]
+        },
+        {
+            "name": "Launch Frontend (Chrome)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/src/frontend/src",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack:///./src/*": "${webRoot}/*"
+            },
+            "preLaunchTask": "dev-frontend"
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch API + Frontend",
+            "configurations": ["Launch API", "Launch Frontend (Chrome)"],
+            "presentation": {
+                "hidden": false,
+                "group": "dev",
+                "order": 1
+            },
+            "stopAll": true
+        }
+    ]
+}
