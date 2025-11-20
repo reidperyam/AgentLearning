@@ -102,7 +102,90 @@ npm run preview
 
 # Lint
 npm run lint
+
+# Run tests
+npm test
+
+# Run tests in watch mode
+npm test -- --watch
+
+# Run tests with coverage
+npm test -- --coverage
 ```
+
+### Testing
+
+The frontend uses **Vitest** as the testing framework with **React Testing Library** for component testing.
+
+#### Running Tests
+
+**Run all tests:**
+```bash
+cd src/frontend
+npm test
+```
+
+**Run tests in watch mode** (automatically re-run on file changes):
+```bash
+cd src/frontend
+npm test -- --watch
+```
+
+**Run specific test file:**
+```bash
+cd src/frontend
+npm test Modal.test.tsx
+```
+
+**Run tests with coverage report:**
+```bash
+cd src/frontend
+npm test -- --coverage
+```
+
+#### Test Structure
+
+Tests are located alongside their components using the `.test.tsx` naming convention:
+```
+src/components/
+├── ui/
+│   ├── Modal/
+│   │   ├── Modal.tsx
+│   │   └── Modal.test.tsx
+│   └── Icon/
+│       ├── Icon.tsx
+│       └── Icon.test.tsx
+```
+
+#### Writing Tests
+
+Test files use Vitest and React Testing Library:
+
+```typescript
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { MyComponent } from './MyComponent';
+
+describe('MyComponent', () => {
+  it('should render correctly', () => {
+    render(<MyComponent />);
+    expect(screen.getByText('Expected text')).toBeInTheDocument();
+  });
+
+  it('should handle click events', () => {
+    const handleClick = vi.fn();
+    render(<MyComponent onClick={handleClick} />);
+    fireEvent.click(screen.getByRole('button'));
+    expect(handleClick).toHaveBeenCalled();
+  });
+});
+```
+
+#### Test Configuration
+
+- **vitest.config.ts**: Main test configuration with jsdom environment
+- **vitest.setup.ts**: Setup file for test dependencies (e.g., @testing-library/jest-dom)
+- Test files are identified by `*.test.ts` or `*.test.tsx` pattern
 
 ### VS Code Tasks
 
@@ -220,16 +303,17 @@ This project is for learning purposes. Feel free to:
 
 Here are some ideas for extending this application:
 
-1. **Add SignalR** for real-time WebSocket communication
-2. **Implement authentication** using JWT or OAuth
-3. **Connect to Claude AI** for intelligent responses
-4. **Add MCP servers** for external integrations
-5. **Implement persistence** with Entity Framework Core
-6. **Add unit tests** for both backend and frontend
-7. **Create chat rooms** or channels
-8. **Add file upload** capability
-9. **Implement message reactions** (emoji)
-10. **Add dark mode** toggle
+1. **Expand test coverage** - Run `npm test -- --watch` to add more comprehensive tests for existing components
+2. **Add SignalR** for real-time WebSocket communication
+3. **Implement authentication** using JWT or OAuth
+4. **Connect to Claude AI** for intelligent responses
+5. **Add MCP servers** for external integrations
+6. **Implement persistence** with Entity Framework Core
+7. **Add backend unit tests** using xUnit for C# API endpoints
+8. **Create chat rooms** or channels
+9. **Add file upload** capability
+10. **Implement message reactions** (emoji)
+11. **Add dark mode** toggle
 
 ## License
 
