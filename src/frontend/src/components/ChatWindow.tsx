@@ -3,6 +3,7 @@ import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
 import { Modal } from './ui/Modal/Modal';
 import { Icon } from './ui/Icon';
+import { WeaponPicker } from './ui/WeaponPicker/WeaponPicker';
 import { api } from '../services/api';
 import type { ChatMessage } from '../types/chat';
 
@@ -175,6 +176,18 @@ export function ChatWindow() {
           <Icon variant="neutral" onClick={() => alert('Settings clicked!')} ariaLabel="settings">⚙️</Icon>
           <Icon variant="primary" onClick={() => alert('Star clicked!')} ariaLabel="star">⭐</Icon>
         </div>
+      </div>
+
+      {/* WeaponPicker Component Preview */}
+      <div
+        style={{
+          position: 'fixed',
+          bottom: '2rem',
+          left: '2rem',
+          zIndex: 999,
+        }}
+      >
+        <WeaponPicker onWeaponSelect={(weapon) => console.log('Selected weapon:', weapon)} />
       </div>
     </div>
   );
