@@ -30,6 +30,9 @@ yarn-error.log*
 public/sw.js
 public/workbox-*.js
 
+# Playwright MCP
+.playwright-mcp/
+
 # IDE
 .vscode/*
 !.vscode/tasks.json
